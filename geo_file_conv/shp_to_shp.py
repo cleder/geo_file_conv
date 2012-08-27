@@ -16,6 +16,10 @@ def convert(infilename, outfilename=None):
         dbf = open("%s.dbf" % shapeName, "rb")
     except IOError:
         raise shapefile.ShapefileException("Unable to open %s.dbf" % shapeName)
+    try:
+        prj = open("%s.prj" % shapeName, "rb")
+    except IOError:
+        prj = None
     r = shapefile.Reader(shp=shp, shx=None, dbf=dbf)
     w = shapefile.Writer(r.shapeType)
     # Copy everything from reader object to writer object
@@ -26,6 +30,10 @@ def convert(infilename, outfilename=None):
     if outfilename == None:
         outfilename = shapeName + '-withshx'
     w.save(outfilename)
+    if prj != None:
+        po = open("%s.prj" % outfilename, "wb")
+        po.write(prj.read())
+        po.close()
 
 
 if __name__ == "__main__":
