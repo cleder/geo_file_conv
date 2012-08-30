@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 # Build a new shx index file
 # Sometimes shx files become corrputed or go missing.
 # You can build a new shx index using pyshp.
+import sys
 import os
 import shapefile
 
@@ -31,6 +33,7 @@ def convert(infilename, outfilename=None):
         outfilename = shapeName + '-withshx'
     w.save(outfilename)
     if prj != None:
+        ## and copy the prj file over if it's there
         po = open("%s.prj" % outfilename, "wb")
         po.write(prj.read())
         po.close()
