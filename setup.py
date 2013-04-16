@@ -21,6 +21,7 @@ setup(name='geo_file_conv',
           # -*- Extra requirements: -*-
           'pyshp',
           'fastkml',
+          'geojson',
       ],
       entry_points="""
       # -*- Entry points: -*-

@@ -16,8 +16,19 @@ def convert(infilename, outfilename='doc.kml', namecolumn=0):
                     description= "test")
             if not hasattr(sr.shape, '__geo_interface__'):
                 import ipdb; ipdb.set_trace()
+
             pm.geometry = pygeoif.as_shape(sr.shape)
             doc.append(pm)
+            if  sr.shape.__geo_interface__ != pygeoif.as_shape(sr.shape).__geo_interface__:
+                #import ipdb; ipdb.set_trace()
+                print sr.record
+                print len(sr.shape.__geo_interface__['coordinates']),  len(pygeoif.as_shape(sr.shape).__geo_interface__['coordinates'])
+                print sr.shape.__geo_interface__['type'],  pygeoif.as_shape(sr.shape).__geo_interface__['type']
+                #for i in range(0,len(sr.shape.__geo_interface__['coordinates'])):
+                #    print sr.shape.__geo_interface__['coordinates'][i] == pygeoif.as_shape(sr.shape).__geo_interface__['coordinates'][i]
+
+
+
     xml = '<?xml version="1.0" encoding="UTF-8"?>' + k.to_string()
     #try:
     #    xml = xml.decode('utf-8', 'ignore')
